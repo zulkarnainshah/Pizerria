@@ -8,4 +8,6 @@ comment3.params=
 comment3.target=java.lang.String\ getPhone()
 comment4.params=
 comment4.target=java.lang.String\ getName()
-numComments=5
+comment5.params=
+comment5.target=int\ getOrderCount()
+numComments=6

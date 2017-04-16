@@ -26,6 +26,9 @@ public class Customer {
         return this.phone;
     }
     public String getName(){
-        return this.getName();
+        return this.name;
+    }
+    public int getOrderCount(){
+        return this.order.size();
     }
 }
