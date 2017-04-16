@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Pizzeria
+comment1.params=
+comment1.target=Pizzeria()
+comment2.params=
+comment2.target=java.util.LinkedList\ getCustomers()
+comment3.params=
+comment3.target=Kitchen\ getKitchen()
+comment4.params=phone
+comment4.target=boolean\ customerWithPhoneExists(java.lang.String)
+comment5.params=g
+comment5.target=void\ main(java.lang.String[])
+numComments=6

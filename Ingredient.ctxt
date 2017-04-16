@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Ingredient
+comment0.text=\n\ Write\ a\ description\ of\ class\ Ingredient\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=name\ price\ category
+comment1.target=Ingredient(java.lang.String,\ double,\ Category)
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=double\ getPrice()
+comment4.params=
+comment4.target=Category\ getCategory()
+comment5.params=
+comment5.target=int\ getSold()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+numComments=7
