@@ -91,7 +91,9 @@ public class Pizzeria {
                 if(customer != null){
                     System.out.println("Serving "+customer.getName());
                     char customerChoice = 0;
+                    Pizza pizza = null;
                     while(customerChoice != 'c' || customerChoice != 'p' || customerChoice != 'o'){
+                        
                         System.out.print("Customer choice (c/p/o):");
                         try{
                             customerChoice = scanner.next().charAt(0);
@@ -101,7 +103,7 @@ public class Pizzeria {
                             //CREATE NEW PIZZA
                             case 'c':
                             //TODO: Create pizza object
-                            Pizza pizza = new Pizza();
+                            pizza = new Pizza();
                             System.out.println("Creating new pizza");
                             String name = "";
                             boolean isPizzaValid = false;
@@ -175,12 +177,14 @@ public class Pizzeria {
                             //SUBMIT ORDER
                             case 'o':
                             //Process order here and move to main menu
-                            if(customer.getOrderCount() == 0){
+                            if(customer.getOrderCount() == 0 || pizza == null){
                                 System.out.println("Empty order discarded");
                                 pizzeriaChoice = '?';
                             }
                             else{
                                 System.out.println("Order submitted");
+                                //also set the sold property of each ingredient in the pizza
+                                
                                 pizzeriaChoice = '?';
                             }
                             break;
