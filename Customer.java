@@ -31,4 +31,11 @@ public class Customer {
     public int getOrderCount(){
         return this.order.size();
     }
+    public LinkedList<Pizza> getOrder(){
+        return this.order;
+    }
+    
+    public LinkedList<Pizza> getOrdered(){
+        return this.ordered;
+    }
 }

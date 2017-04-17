@@ -118,7 +118,9 @@ public class Pizzeria {
                                         System.out.println("ORDER SUMMARY");
                                         System.out.println(pizza);
                                         System.out.println("Total: $"+String.format("%.2f",pizza.calculatePizzaTotal()));
+                                        customer.getOrder().add(pizza);
                                         isPizzaValid = true;
+                                        
                                     }
                                 }
                                 else{
@@ -131,8 +133,8 @@ public class Pizzeria {
                                             System.out.println("Already added "+ingredient);
                                         }
                                         //TODO: Check max of category of ingredient
-                                        else if(ingredient.getCategory().getMax()){
-                                            
+                                        else if(pizza.getAddedCountForIngredientCategory(ingredient.getCategory()) >= ingredient.getCategory().getMax()){
+                                            System.out.println("Can only add "+ingredient.getCategory().getMax()+" "+ingredient.getCategory().getPluralName());
                                         }
                                         else{
                                             pizza.getIngredients().add(ingredient);
@@ -141,8 +143,23 @@ public class Pizzeria {
 
                                     }
                                     else{
-                                        if(!name.equals(".")){
+                                        if(!name.equals(".") && !name.startsWith("-")){
                                             System.out.println("No ingredient matching "+name);
+                                        }
+                                        if(name.startsWith("-")){
+                                            //TODO: get the minus out from the name and search again for that ingredient
+                                            String ingredientName = name.substring(1,name.length());
+                                            Ingredient m_ingredient = pizzeria.kitchen.getIngredientWithName(ingredientName);
+                                            if(m_ingredient != null){
+                                                //Remove from pizza
+                                                
+                                                pizza.getIngredients().remove(m_ingredient);
+                                                System.out.println(pizza);
+                                            }
+                                            else{
+                                                System.out.println("No ingredient matching "+ingredientName);
+                                            }
+
                                         }
                                     }
                                 }
@@ -157,12 +174,14 @@ public class Pizzeria {
 
                             //SUBMIT ORDER
                             case 'o':
+                            //Process order here and move to main menu
                             if(customer.getOrderCount() == 0){
                                 System.out.println("Empty order discarded");
                                 pizzeriaChoice = '?';
                             }
                             else{
-                                //Process order here
+                                System.out.println("Order submitted");
+                                pizzeriaChoice = '?';
                             }
                             break;
 

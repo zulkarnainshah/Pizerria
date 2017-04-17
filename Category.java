@@ -27,4 +27,13 @@ public class Category {
         return this.max;
     }
     
+    public String getPluralName(){
+        if(this.name.equals("topping")){
+            return "toppings";
+        }
+        else{
+            return this.name;
+        }
+    }
+    
 }

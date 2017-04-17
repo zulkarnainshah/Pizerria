@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=int\ getMin()
 comment4.params=
 comment4.target=int\ getMax()
-numComments=5
+comment5.params=
+comment5.target=java.lang.String\ getPluralName()
+numComments=6
