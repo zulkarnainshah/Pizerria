@@ -33,4 +33,5 @@ public class Ingredient {
         return this.name + " " + this.category.toString();
     }
     
+    
 }

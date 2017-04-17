@@ -93,11 +93,62 @@ public class Pizzeria {
                     char customerChoice = 0;
                     while(customerChoice != 'c' || customerChoice != 'p' || customerChoice != 'o'){
                         System.out.print("Customer choice (c/p/o):");
-                        customerChoice = scanner.next().charAt(0);
+                        try{
+                            customerChoice = scanner.next().charAt(0);
+                        }
+                        catch(StringIndexOutOfBoundsException e){}
                         switch(customerChoice){
                             //CREATE NEW PIZZA
                             case 'c':
+                            //TODO: Create pizza object
+                            Pizza pizza = new Pizza();
                             System.out.println("Creating new pizza");
+                            String name = "";
+                            boolean isPizzaValid = false;
+                            while(isPizzaValid == false){
+                                System.out.print("Ingredient(s):");
+                                name = scanner.next();
+                                if(name.equals(".")){
+                                    //Pizza validation and set isPizzaValid accordingly
+                                    String pizzaValidationMessage = pizza.validatePizza(); 
+                                    if(pizzaValidationMessage.length() > 0){
+                                        System.out.println(pizzaValidationMessage);
+                                    }
+                                    else{
+                                        System.out.println("ORDER SUMMARY");
+                                        System.out.println(pizza);
+                                        System.out.println("Total: $"+String.format("%.2f",pizza.calculatePizzaTotal()));
+                                        isPizzaValid = true;
+                                    }
+                                }
+                                else{
+                                    Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(name);
+                                    if(ingredient != null){
+                                        //TODO: Add ingredient to pizza after validation
+                                        // The same ingredient cannot be added twice
+                                        //And you cannot add more than the maximum ingredients for a category
+                                        if(pizza.containsIngredient(ingredient) == true){
+                                            System.out.println("Already added "+ingredient);
+                                        }
+                                        //TODO: Check max of category of ingredient
+                                        else if(ingredient.getCategory().getMax()){
+                                            
+                                        }
+                                        else{
+                                            pizza.getIngredients().add(ingredient);
+                                            System.out.println(pizza);
+                                        }
+
+                                    }
+                                    else{
+                                        if(!name.equals(".")){
+                                            System.out.println("No ingredient matching "+name);
+                                        }
+                                    }
+                                }
+
+                            }
+
                             break;
 
                             //SELECT FROM POPULAR PAST PIZZAS
@@ -119,7 +170,7 @@ public class Pizzeria {
                             System.out.println("c = create new pizza\np = select from popular past pizzas\no = submit order");
                             break;
                         }
-                        
+
                         if(pizzeriaChoice == '?'){
                             break;
                         }

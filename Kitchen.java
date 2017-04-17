@@ -5,6 +5,7 @@
  * @version (a version number or a date)
  */
 import java.util.LinkedList;
+import java.util.Iterator;
 
 public class Kitchen {
     public static final Category CRUST = new Category("crust", 1, 1);
@@ -24,5 +25,16 @@ public class Kitchen {
         ingredients.add(new Ingredient("Jalapenos",1.00,TOPPING));
         ingredients.add(new Ingredient("Beef",2.75,TOPPING));
         ingredients.add(new Ingredient("Pepperoni",2.50,TOPPING));
+    }
+    public Ingredient getIngredientWithName(String name){
+        Iterator<Ingredient> iterator = this.ingredients.iterator();
+        while(iterator.hasNext()){
+            Ingredient ingredient = iterator.next();
+            String ingredientName = ingredient.getName();
+            if(ingredientName.equalsIgnoreCase(name) || ingredientName.toLowerCase().startsWith(name.toLowerCase())){
+                return ingredient;
+            }
+        }
+        return null;
     }
 }

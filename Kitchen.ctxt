@@ -3,4 +3,6 @@ comment0.target=Kitchen
 comment1.params=
 comment1.target=Kitchen()
 comment1.text=Initializes\ all\ ingredients\ and\ adds\ to\ linked\ list*
-numComments=2
+comment2.params=name
+comment2.target=Ingredient\ getIngredientWithName(java.lang.String)
+numComments=3
