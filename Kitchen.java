@@ -37,4 +37,8 @@ public class Kitchen {
         }
         return null;
     }
+    
+    public LinkedList<Ingredient>getIngredients(){
+        return this.ingredients;
+    }
 }

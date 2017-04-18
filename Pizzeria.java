@@ -121,6 +121,7 @@ public class Pizzeria {
                                         System.out.println(pizza);
                                         System.out.println("Total: $"+String.format("%.2f",pizza.calculatePizzaTotal()));
                                         customer.getOrder().add(pizza);
+                                        customer.getOrdered().add(pizza);
                                         isPizzaValid = true;
                                         
                                     }
@@ -139,6 +140,8 @@ public class Pizzeria {
                                             System.out.println("Can only add "+ingredient.getCategory().getMax()+" "+ingredient.getCategory().getPluralName());
                                         }
                                         else{
+                                            //TODO: update ingredient sold value
+                                            //ingredient.setSold(ingredient.getSold()+1);
                                             pizza.getIngredients().add(ingredient);
                                             System.out.println(pizza);
                                         }
@@ -154,7 +157,6 @@ public class Pizzeria {
                                             Ingredient m_ingredient = pizzeria.kitchen.getIngredientWithName(ingredientName);
                                             if(m_ingredient != null){
                                                 //Remove from pizza
-                                                
                                                 pizza.getIngredients().remove(m_ingredient);
                                                 System.out.println(pizza);
                                             }
@@ -183,8 +185,8 @@ public class Pizzeria {
                             }
                             else{
                                 System.out.println("Order submitted");
-                                //also set the sold property of each ingredient in the pizza
-                                
+                                //add pizza to 'Ordered' list of Customer
+                                //customer.getOrdered().add(pizza);
                                 pizzeriaChoice = '?';
                             }
                             break;
@@ -206,6 +208,7 @@ public class Pizzeria {
                 break;
 
                 case 'r':
+                pizzeria.printReport();
                 break;
 
                 //EXIT
@@ -219,5 +222,115 @@ public class Pizzeria {
             }
         }
 
+    }
+    
+     /**Gets the 'sold' quantity value for each ingredient from all customers**/
+    public void printReport(){
+        int thinCrust = 0;
+        int thickCrust = 0;
+        int tomatoSauce = 0;
+        int barbequeSauce = 0;
+        int capsicumTopping = 0;
+        int olivesTopping = 0;
+        int jalapenosTopping = 0;
+        int beefTopping = 0;
+        int pepperoniTopping = 0;
+        double totalIncome = 0.0;
+        String message = "";
+        
+        Iterator<Customer> customerIterator = this.customers.iterator();
+        while(customerIterator.hasNext()){
+            Customer customer = customerIterator.next();
+            Iterator<Pizza> orderIterator = customer.getOrdered().iterator();
+            while(orderIterator.hasNext()){
+                Pizza pizza = orderIterator.next();
+                Iterator<Ingredient> ingredientIterator = pizza.getIngredients().iterator();
+                while(ingredientIterator.hasNext()){
+                    Ingredient ingredient = ingredientIterator.next();
+                    if(ingredient.toString().contains("Thin")){
+                        thinCrust++;
+                    }
+                    else if(ingredient.toString().contains("Thick")){
+                        thickCrust++;
+                    }
+                    else if(ingredient.toString().contains("Tomato")){
+                        tomatoSauce++;
+                    }
+                    else if(ingredient.toString().contains("Barbeque")){
+                        barbequeSauce++;
+                    }
+                    else if(ingredient.toString().contains("Capsicum")){
+                        capsicumTopping++;
+                    }
+                    else if(ingredient.toString().contains("Olives")){
+                        olivesTopping++;
+                    }
+                    else if(ingredient.toString().contains("Jalapenos")){
+                        jalapenosTopping++;
+                    }
+                    else if(ingredient.toString().contains("Beef")){
+                        beefTopping++;
+                    }
+                    else if(ingredient.toString().contains("Pepperoni")){
+                        pepperoniTopping++;
+                    }
+                }
+            }
+        }
+        
+        //Use Kitchen ingredients list as buffer to get string messages for report
+        Iterator<Ingredient> ingredientIterator = this.kitchen.getIngredients().iterator();
+                while(ingredientIterator.hasNext()){
+                    Ingredient ingredient = ingredientIterator.next();
+                    if(ingredient.toString().contains("Thin")){
+                        ingredient.setSold(thinCrust);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Thick")){
+                        ingredient.setSold(thickCrust);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Tomato")){
+                        ingredient.setSold(tomatoSauce);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Barbeque")){
+                        ingredient.setSold(barbequeSauce);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Capsicum")){
+                        ingredient.setSold(capsicumTopping);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Olives")){
+                        ingredient.setSold(olivesTopping);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Jalapenos")){
+                        ingredient.setSold(jalapenosTopping);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Beef")){
+                        ingredient.setSold(beefTopping);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                    else if(ingredient.toString().contains("Pepperoni")){
+                        ingredient.setSold(pepperoniTopping);
+                        message += ingredient.getStringForReport()+"\n";
+                        totalIncome += ingredient.getTotalPrice();
+                    }
+                }
+                
+                message += "Income: $"+String.format("%.2f",totalIncome);
+                System.out.println(message);
+     
     }
 }
