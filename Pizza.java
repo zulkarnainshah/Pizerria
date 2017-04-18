@@ -22,15 +22,20 @@ public class Pizza {
 
     public String toString(){
         //CRUST pizza with TOPPINGS and SAUCE: $PRICE
+        return crust() +" "+ toppings()+ " "+ sauce()+": $"+String.format("%.2f",this.calculatePizzaTotal());
+    }
+    
+    public String crust(){
         Ingredient crustIngredient = this.getCrustIngredient();
-        Ingredient sauceIngredient = this.getSauceIngredient();
+        return crustIngredient != null ? crustIngredient.getName() + " crust pizza" : "no crust";
+    }
+    public String toppings(){
         ArrayList<Ingredient> toppingIngredientList = this.getToppingIngredientList();
-
-        String crustMessage = crustIngredient != null ? crustIngredient.getName() + " crust pizza" : "no crust";
-        String sauceMessage = sauceIngredient != null ? "and " + sauceIngredient.getName() + " sauce" : "and no sauce";
-        String toppingMessage = toppingIngredientList.size() > 0 ? "with "+ this.getToppingIngredientListAsString() : "with no toppings";
-
-        return crustMessage +" "+ toppingMessage+ " "+ sauceMessage+": $"+String.format("%.2f",this.calculatePizzaTotal());
+        return toppingIngredientList.size() > 0 ? "with "+ this.getToppingIngredientListAsString() : "with no toppings";
+    }
+    public String sauce(){
+        Ingredient sauceIngredient = this.getSauceIngredient();
+        return sauceIngredient != null ? "and " + sauceIngredient.getName() + " sauce" : "and no sauce";
     }
 
     public Ingredient getCrustIngredient(){
