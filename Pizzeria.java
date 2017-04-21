@@ -125,7 +125,7 @@ public class Pizzeria {
                                         System.out.println(pizza);
                                         System.out.println("Total: $"+String.format("%.2f",pizza.calculatePizzaTotal()));
                                         customer.getOrder().add(pizza);
-                                        customer.getOrdered().add(pizza);
+                                        //customer.getOrdered().add(pizza);
                                         isPizzaValid = true;
 
                                     }
@@ -145,6 +145,7 @@ public class Pizzeria {
                                         System.out.println(pizza); 
                                     }else{
                                         //Handle only comma supplied by user 
+                                        System.out.println("No ingredient matching "+name);
                                     }
                                 }
                                 //PROCESS SINGLE INGREDIENT SUPPLIED AS SINGLE STRING
@@ -207,8 +208,10 @@ public class Pizzeria {
                             }
                             else{
                                 System.out.println("Order submitted");
-                                //add pizza to 'Ordered' list of Customer
-                                //customer.getOrdered().add(pizza);
+                                //add pizza to 'Ordered' list of Customer and remove from 'Order' list
+                                customer.getOrdered().addAll(customer.getOrder());
+                                customer.getOrder().clear();
+                                System.out.println("AFTER REMOVAL ORDER SIZE = "+customer.getOrderCount());
                                 pizzeriaChoice = '?';
                             }
                             break;
