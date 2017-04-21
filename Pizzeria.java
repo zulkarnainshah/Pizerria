@@ -68,15 +68,20 @@ public class Pizzeria {
                 case 'a':
                 System.out.print("Phone:");
                 String phone = scanner.next();
-                if(pizzeria.customerWithPhoneExists(phone) == false){
-                    System.out.print("Name:");
-                    String name = scanner.next();
-                    Customer newCustomer = new Customer(phone,name);
-                    pizzeria.customers.add(newCustomer);
+                if(phone.length()>0){
+                    if(pizzeria.customerWithPhoneExists(phone) == false){
+                        System.out.print("Name:");
+                        String name = scanner.next();
+                        if(name.length()>0){
+                            Customer newCustomer = new Customer(phone,name);
+                            pizzeria.customers.add(newCustomer);
+                        }
+                    }
+                    else{
+                        System.out.println("An existing customer has that phone number");
+                    }
                 }
-                else{
-                    System.out.println("An existing customer has that phone number");
-                }
+
                 break;
 
                 //VIEW CUSTOMERS
@@ -211,7 +216,6 @@ public class Pizzeria {
                                 //add pizza to 'Ordered' list of Customer and remove from 'Order' list
                                 customer.getOrdered().addAll(customer.getOrder());
                                 customer.getOrder().clear();
-                                System.out.println("AFTER REMOVAL ORDER SIZE = "+customer.getOrderCount());
                                 pizzeriaChoice = '?';
                             }
                             break;
