@@ -130,6 +130,24 @@ public class Pizzeria {
 
                                     }
                                 }
+                                //PROCESS MORE THAN ONE INGREDIENTS SUPPLIED AS SINGLE COMMA SEPARATED STRING
+                                else if(name.contains(",")){
+                                    String[] tokens = name.split(",");
+                                    if(tokens.length>0){
+                                        for(String ingrName:tokens){
+                                            Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(ingrName);
+                                            if(ingredient != null){
+                                                //TODO: update ingredient sold value
+                                                //ingredient.setSold(ingredient.getSold()+1);
+                                                pizza.getIngredients().add(ingredient);
+                                            }
+                                        }
+                                        System.out.println(pizza); 
+                                    }else{
+                                        //Handle only comma supplied by user 
+                                    }
+                                }
+                                //PROCESS SINGLE INGREDIENT SUPPLIED AS SINGLE STRING
                                 else{
                                     Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(name);
                                     if(ingredient != null){
