@@ -196,9 +196,7 @@ public class Pizzeria {
                                 }
                                 //PROCESS SINGLE INGREDIENT SUPPLIED AS SINGLE STRING
                                 else{
-                                    //Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(name);
                                     LinkedList<Ingredient> ingredients = pizzeria.kitchen.getIngredientsWithName(name);
-                                    //if(ingredient != null){
                                         if(ingredients.size() == 1){
                                         //Add ingredient to pizza after these validations
                                         //1. The same ingredient cannot be added twice
