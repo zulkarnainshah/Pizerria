@@ -184,7 +184,45 @@ public class Pizzeria {
                                     }
                                     else{
                                         if(!name.equals(".") && !name.startsWith("-")){
-                                            System.out.println("No ingredient matching "+name);
+                                            //TODO: Try searching name against category names of ingredients
+                                            LinkedList<Ingredient> matched_ingredients = pizzeria.kitchen.getIngredientsHavingCategoryName(name);
+                                            if(matched_ingredients.size()>0){
+                                                System.out.println("Select from matches below:");
+                                                Iterator ing_iterator = matched_ingredients.iterator();
+                                                int index = 1;
+                                                while(ing_iterator.hasNext()){
+                                                    System.out.println(index+". "+ing_iterator.next());
+                                                    index++;
+                                                }
+                                                System.out.print("Selection: ");
+                                                char selection = 0;
+                                                try{
+                                                    selection = scanner.next().charAt(0);
+                                                    int selectedChoice = Character.getNumericValue(selection);
+                                                    int actualIndex = selectedChoice - 1;
+                                                    if(actualIndex >= 0 && actualIndex < matched_ingredients.size()){
+                                                        Ingredient ingredientToAdd = matched_ingredients.get(actualIndex);
+                                                        if(pizza.containsIngredient(ingredientToAdd) == true){
+                                                            System.out.println("Already added "+ingredientToAdd);
+                                                        }
+                                                        //Check max of category of ingredient
+                                                        else if(pizza.getAddedCountForIngredientCategory(ingredientToAdd.getCategory()) >= ingredientToAdd.getCategory().getMax()){
+                                                            System.out.println("Can only add "+ingredientToAdd.getCategory().getMax()+" "+ingredientToAdd.getCategory().getPluralName());
+                                                        }
+                                                        else{
+                                                          ingredientToAdd.setSold(ingredientToAdd.getSold()+1);
+                                                          pizza.getIngredients().add(ingredientToAdd);
+                                                          System.out.println(pizza);  
+                                                        }
+                                                    }
+                                                }
+                                                catch(StringIndexOutOfBoundsException ex){
+                                                }
+                                                
+                                            }
+                                            else{
+                                                System.out.println("No ingredient matching "+name);
+                                            }
                                         }
                                         if(name.startsWith("-")){
                                             //Get the minus out from the name and search again for that ingredient
@@ -203,6 +241,7 @@ public class Pizzeria {
                                             }
 
                                         }
+
                                     }
                                 }
 

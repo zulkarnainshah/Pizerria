@@ -1,5 +1,5 @@
 
-public class __SHELL63 extends bluej.runtime.Shell {
+public class __SHELL84 extends bluej.runtime.Shell {
 public static void run() throws Throwable {
 
 java.lang.String[] __bluej_param0 = { };
