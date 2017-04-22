@@ -199,5 +199,13 @@ public class Pizza {
         }
         return 0;
     }
+    
+    public void setSold(int sold){
+        this.sold = sold;
+    }
+    
+    public int getSold(){
+        return this.sold;
+    }
 
 }
