@@ -192,7 +192,9 @@ public class Pizzeria {
                                             Ingredient m_ingredient = pizzeria.kitchen.getIngredientWithName(ingredientName);
                                             if(m_ingredient != null){
                                                 //Remove from pizza
-                                                m_ingredient.setSold(m_ingredient.getSold()-1);
+                                                if(m_ingredient.getSold() > 0){
+                                                    m_ingredient.setSold(m_ingredient.getSold()-1);
+                                                }
                                                 pizza.getIngredients().remove(m_ingredient);
                                                 System.out.println(pizza);
                                             }
@@ -368,12 +370,12 @@ public class Pizzeria {
         int pepperoniTopping = 0;
         double totalIncome = 0.0;
         String message = "";
-        
+
         Iterator<Ingredient>ingredientIterator = this.kitchen.getIngredients().iterator();
         while(ingredientIterator.hasNext()){
-           Ingredient ingredient = ingredientIterator.next();
-           message += ingredient.getStringForReport()+"\n";
-           totalIncome += ingredient.getTotalPrice(); 
+            Ingredient ingredient = ingredientIterator.next();
+            message += ingredient.getStringForReport()+"\n";
+            totalIncome += ingredient.getTotalPrice(); 
         }
 
         message += "Income: $"+String.format("%.2f",totalIncome);
