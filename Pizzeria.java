@@ -160,6 +160,40 @@ public class Pizzeria {
                                         System.out.println("No ingredient matching "+name);
                                     }
                                 }
+                                //PROCESS empty ingredient name or zero-length ingredient name here
+                                else if(name.trim().length() < 1){
+                                    //TODO: Show all ingredients to select from
+                                    LinkedList<Ingredient> allIngredients = pizzeria.kitchen.getIngredients();
+                                    System.out.println("Select from matches below:");
+                                    int index = 1;
+                                    for(Ingredient ingredient:allIngredients){
+                                        System.out.println(index+". "+ingredient);
+                                        index++;
+                                    }
+                                    System.out.print("Selection: ");
+                                    char selection = 0;
+                                    try{
+                                        selection = scanner.next().charAt(0);
+                                        int selectedChoice = Character.getNumericValue(selection);
+                                        int actualIndex = selectedChoice - 1;
+                                        if(actualIndex >= 0 && actualIndex < allIngredients.size()){
+                                            Ingredient ingredientToAdd = allIngredients.get(actualIndex);
+                                            if(pizza.containsIngredient(ingredientToAdd) == true){
+                                                System.out.println("Already added "+ingredientToAdd);
+                                            }
+                                            //Check max of category of ingredient
+                                            else if(pizza.getAddedCountForIngredientCategory(ingredientToAdd.getCategory()) >= ingredientToAdd.getCategory().getMax()){
+                                                System.out.println("Can only add "+ingredientToAdd.getCategory().getMax()+" "+ingredientToAdd.getCategory().getPluralName());
+                                            }
+                                            else{
+                                                ingredientToAdd.setSold(ingredientToAdd.getSold()+1);
+                                                pizza.getIngredients().add(ingredientToAdd);
+                                                System.out.println(pizza);  
+                                            }
+                                        }
+                                    }
+                                    catch(StringIndexOutOfBoundsException ex){}
+                                }
                                 //PROCESS SINGLE INGREDIENT SUPPLIED AS SINGLE STRING
                                 else{
                                     Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(name);
