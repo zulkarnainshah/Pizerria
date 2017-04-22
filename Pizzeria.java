@@ -192,6 +192,7 @@ public class Pizzeria {
                                             Ingredient m_ingredient = pizzeria.kitchen.getIngredientWithName(ingredientName);
                                             if(m_ingredient != null){
                                                 //Remove from pizza
+                                                m_ingredient.setSold(m_ingredient.getSold()-1);
                                                 pizza.getIngredients().remove(m_ingredient);
                                                 System.out.println(pizza);
                                             }
