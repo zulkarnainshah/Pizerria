@@ -38,10 +38,4 @@ public class Customer {
     public LinkedList<Pizza> getOrdered(){
         return this.ordered;
     }
-    
-    /**Adds the supplied Order to the Ordered list at a position determined by the SOLD value of the pizzas in the order**/
-    public void addOrderToHistory(LinkedList<Pizza> order){
-        //TODO: Determine the proper position of each pizza while adding to history (Ordered list)
-        
-    }
 }
