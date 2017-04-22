@@ -40,6 +40,20 @@ public class Kitchen {
         }
         return null;
     }
+    public LinkedList<Ingredient> getIngredientsWithName(String name){
+        LinkedList<Ingredient> ingredients = new LinkedList<>();
+        Iterator<Ingredient> iterator = this.ingredients.iterator();
+        while(iterator.hasNext()){
+            Ingredient ingredient = iterator.next();
+            String ing_name = ingredient.getName();
+            if(name.length() != 0){
+                if(ing_name.equalsIgnoreCase(name) || ing_name.toLowerCase().startsWith(name.toLowerCase())){
+                    ingredients.add(ingredient);
+                }
+            }
+        }
+        return ingredients;
+    }
     public LinkedList<Ingredient> getIngredientsHavingCategoryName(String c_Name){
         LinkedList<Ingredient> ingredients = new LinkedList<>();
         Iterator<Ingredient> iterator = this.ingredients.iterator();

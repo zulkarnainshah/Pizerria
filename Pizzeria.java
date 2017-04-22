@@ -196,11 +196,14 @@ public class Pizzeria {
                                 }
                                 //PROCESS SINGLE INGREDIENT SUPPLIED AS SINGLE STRING
                                 else{
-                                    Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(name);
-                                    if(ingredient != null){
+                                    //Ingredient ingredient = pizzeria.kitchen.getIngredientWithName(name);
+                                    LinkedList<Ingredient> ingredients = pizzeria.kitchen.getIngredientsWithName(name);
+                                    //if(ingredient != null){
+                                        if(ingredients.size() == 1){
                                         //Add ingredient to pizza after these validations
                                         //1. The same ingredient cannot be added twice
                                         //2. And you cannot add more than the maximum ingredients for a category
+                                        Ingredient ingredient = ingredients.get(0);
                                         if(pizza.containsIngredient(ingredient) == true){
                                             System.out.println("Already added "+ingredient);
                                         }
@@ -215,6 +218,37 @@ public class Pizzeria {
                                             System.out.println(pizza);
                                         }
 
+                                    }
+                                    else if(ingredients.size() > 1){
+                                        System.out.println("Select from matches below:");
+                                        int index = 1;
+                                        for(Ingredient ingredient:ingredients){
+                                            System.out.println(index+". "+ingredient);
+                                            index++;
+                                        }
+                                        System.out.print("Selection: ");
+                                        char selection = 0;
+                                        try{
+                                            selection = scanner.next().charAt(0);
+                                            int selectedChoice = Character.getNumericValue(selection);
+                                            int actualIndex = selectedChoice - 1;
+                                            if(actualIndex >= 0 && actualIndex < ingredients.size()){
+                                                Ingredient ingredientToAdd = ingredients.get(actualIndex);
+                                                if(pizza.containsIngredient(ingredientToAdd) == true){
+                                                    System.out.println("Already added "+ingredientToAdd);
+                                                }
+                                                //Check max of category of ingredient
+                                                else if(pizza.getAddedCountForIngredientCategory(ingredientToAdd.getCategory()) >= ingredientToAdd.getCategory().getMax()){
+                                                    System.out.println("Can only add "+ingredientToAdd.getCategory().getMax()+" "+ingredientToAdd.getCategory().getPluralName());
+                                                }
+                                                else{
+                                                    ingredientToAdd.setSold(ingredientToAdd.getSold()+1);
+                                                    pizza.getIngredients().add(ingredientToAdd);
+                                                    System.out.println(pizza);  
+                                                } 
+                                            }
+                                        }
+                                        catch(StringIndexOutOfBoundsException ex){}
                                     }
                                     else{
                                         if(!name.equals(".") && !name.startsWith("-")){
