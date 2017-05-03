@@ -126,13 +126,18 @@ public class Pizzeria {
                                         System.out.println(pizzaValidationMessage);
                                     }
                                     else{
-                                        System.out.println("ORDER SUMMARY");
-                                        System.out.println(pizza);
-                                        System.out.println("Total: $"+String.format("%.2f",pizza.calculatePizzaTotal()));
                                         pizza.setSold(pizza.getSold()+1);
                                         customer.getOrder().add(pizza);
                                         isPizzaValid = true;
-
+                                        System.out.println("ORDER SUMMARY");
+                                        double total = 0.0;
+                                        Iterator<Pizza>iter = customer.getOrder().iterator();
+                                        while(iter.hasNext()){
+                                          Pizza m_pizza = iter.next();
+                                          System.out.println(m_pizza);
+                                          total += m_pizza.calculatePizzaTotal();
+                                        }
+                                        System.out.println("Total: $"+String.format("%.2f",total));
                                     }
                                 }
                                 //PROCESS MORE THAN ONE INGREDIENTS SUPPLIED AS SINGLE COMMA SEPARATED STRING
