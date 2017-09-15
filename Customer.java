@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Customer {
     private String phone;
     private String name;
-    private LinkedList<Pizza> ordered = new LinkedList<Pizza>(); // Successfully placed orders are added here to maintaing history of customer
+    private LinkedList<Pizza> ordered = new LinkedList<Pizza>(); // Successfully placed orders are added here for maintaing history of customer
     private LinkedList<Pizza> order = new LinkedList<Pizza>(); // remove all elements from this when order successfully placed
     
     public Customer(String phone,String name){
@@ -26,6 +26,16 @@ public class Customer {
         return this.phone;
     }
     public String getName(){
-        return this.getName();
+        return this.name;
+    }
+    public int getOrderCount(){
+        return this.order.size();
+    }
+    public LinkedList<Pizza> getOrder(){
+        return this.order;
+    }
+    
+    public LinkedList<Pizza> getOrdered(){
+        return this.ordered;
     }
 }

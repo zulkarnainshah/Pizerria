@@ -18,4 +18,22 @@ public class Category {
     public String toString(){
         return this.name;
     }
+    
+    public int getMin(){
+        return this.min;
+    }
+    
+    public int getMax(){
+        return this.max;
+    }
+    
+    public String getPluralName(){
+        if(this.name.equals("topping")){
+            return "toppings";
+        }
+        else{
+            return this.name;
+        }
+    }
+    
 }
