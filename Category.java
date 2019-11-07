@@ -1,7 +1,7 @@
 /**
  * Write a description of class Category here.
  *
- * @author (your name)
+ * @author (Zulkarnain Shah)
  * @version (a version number or a date)
  */
 public class Category {
